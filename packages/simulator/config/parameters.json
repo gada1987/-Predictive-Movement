@@ -1,0 +1,173 @@
+{
+  "id": "pPcM-ucQZ",
+  "startDate": "2023-04-26T13:37:41.083Z",
+  "fixedRoute": 21,
+  "emitters": [
+    "bookings",
+    "buses",
+    "busLines",
+    "busStops",
+    "cars",
+    "kommuner",
+    "measureStations",
+    "passengers",
+    "taxis"
+  ],
+  "fleets": {
+    "Arjeplogs kommun": {
+      "fleets": [
+        {
+          "name": "Länstrafiken",
+          "type": "bus",
+          "vehicles": {
+            "bus": 5
+          }
+        },
+        {
+          "name": "Taxi",
+          "vehicles": {
+            "taxi": 2
+          }
+        },
+        {
+          "name": "Postnord",
+          "vehicles": {
+            "tungLastbil": 0,
+            "medeltungLastbil": 1,
+            "lättLastbil": 1,
+            "bil": 0
+          },
+          "marketshare": 0.6,
+          "hub": [21.034263, 64.746704]
+        }
+      ]
+    },
+    "Arvidsjaurs kommun": {
+      "fleets": [
+        {
+          "name": "Länstrafiken",
+          "type": "bus",
+          "vehicles": {
+            "bus": 5
+          }
+        },
+        {
+          "name": "Taxi",
+          "vehicles": {
+            "taxi": 2
+          }
+        },
+        {
+          "name": "Postnord",
+          "vehicles": {
+            "tungLastbil": 0,
+            "medeltungLastbil": 1,
+            "lättLastbil": 1,
+            "bil": 0
+          },
+          "marketshare": 60,
+          "hub": [21.034263, 64.746704]
+        }
+      ]
+    },
+    "Bodens kommun": {
+      "fleets": [
+        {
+          "name": "Länstrafiken",
+          "type": "bus",
+          "vehicles": {
+            "bus": 3
+          }
+        },
+        {
+          "name": "Taxi",
+          "vehicles": {
+            "taxi": 2
+          }
+        },
+        {
+          "name": "Postnord",
+          "vehicles": {
+            "tungLastbil": 0,
+            "medeltungLastbil": 2,
+            "lättLastbil": 2,
+            "bil": 0
+          },
+          "marketshare": 0.6,
+          "hub": [22.045246, 65.614869]
+        }
+      ]
+    },
+    "Jokkmokks kommun": {
+      "fleets": [
+        {
+          "name": "Länstrafiken",
+          "type": "bus",
+          "vehicles": {
+            "bus": 5
+          }
+        },
+        {
+          "name": "Taxi",
+          "vehicles": {
+            "taxi": 2
+          }
+        }
+      ]
+    },
+    "Ljusdals kommun": {
+      "fleets": [
+        {
+          "name": "Postnord",
+          "vehicles": {
+            "tungLastbil": 0,
+            "medeltungLastbil": 3,
+            "lättLastbil": 1,
+            "bil": 0
+          },
+          "marketshare": 60,
+          "hub": [17.08409, 61.741754]
+        },
+        {
+          "name": "SNX",
+          "vehicles": {
+            "tungLastbil": 0,
+            "medeltungLastbil": 2,
+            "lättLastbil": 1,
+            "bil": 0
+          },
+          "marketshare": 6,
+          "hub": [16.058036, 61.820841]
+        }
+      ]
+    },
+    "Storumans kommun": {
+      "fleets": [
+        {
+          "name": "Länstrafiken",
+          "type": "bus",
+          "vehicles": {
+            "bus": 1
+          }
+        },
+        {
+          "name": "Taxi",
+          "vehicles": {
+            "taxi": 2
+          }
+        },
+        {
+          "name": "Postnord",
+          "vehicles": {
+            "tungLastbil": 1,
+            "medeltungLastbil": 2,
+            "lättLastbil": 1,
+            "bil": 0
+          },
+          "marketshare": 60,
+          "hub": [14.640025, 63.222212]
+        }
+      ]
+    }
+  }
+}

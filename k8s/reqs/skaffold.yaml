@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: pm-digital-twin
+deploy:
+  kubectl:
+    manifests:
+      # - namespaces.yaml
+      # - nginx.yaml
+      # - cert-manager.yaml
+      - cluster-issuer.yaml
+      - cluster-crt.yaml
+      - elasticsearch.yaml

@@ -1,0 +1,28 @@
+services:
+
+  # *************************************************************** #
+  elasticsearch:
+    image: pelias/elasticsearch:7.5.1
+    environment:
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+      - path.data=/data/elasticsearch
+      - cluster.name=predictivemovement
+    volumes:
+      - elasticsearch-data:/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    depends_on:
+      - busybox-elasticsearch-volume-permission
+
+  busybox-elasticsearch-volume-permission:
+    image: busybox:latest
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    command: 
+      - sh 
+      - -c 
+      - chown -R 1000:1000 /usr/share/elasticsearch/data
+
+volumes:
+  elasticsearch-data:

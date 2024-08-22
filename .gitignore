@@ -1,0 +1,11 @@
+.DS_Store
+.merlin
+.bsb.lock
+npm-debug.log
+packages/map/lib
+node_modules
+.envrc
+.vscode/
+.cache
+docker/data
+*.zip

@@ -1,0 +1,34 @@
+{
+  "name": "digital-twin",
+  "version": "2.0.1",
+  "description": "## Background",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm:simulator\" \"npm:visualisation\"",
+    "simulator": "cd packages/simulator && npm run dev",
+    "visualisation": "cd packages/visualisation && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PredictiveMovement/digital-twin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PredictiveMovement/digital-twin/issues"
+  },
+  "homepage": "https://github.com/PredictiveMovement/digital-twin#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "eslint": "^8.39.0",
+    "eslint-plugin-rxjs": "^5.0.3",
+    "lerna": "^6.6.2",
+    "prettier": "^2.5.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

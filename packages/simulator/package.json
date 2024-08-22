@@ -1,0 +1,60 @@
+{
+  "name": "digital-twin",
+  "version": "0.7.0",
+  "description": "",
+  "main": "web/index.js",
+  "scripts": {
+    "dev": "nodemon web/index.js",
+    "test": "jest __tests__",
+    "watch": "jest --watch __tests__",
+    "preboot": "node preboot.js",
+    "start": "node web/index.js"
+  },
+  "author": "Iteam",
+  "license": "MIT",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.17.0",
+    "adm-zip": "^0.5.10",
+    "chalk": "^3.0.0",
+    "cookie": "^0.5.0",
+    "csv-parse": "^4.16.0",
+    "csv-stream": "^0.2.0",
+    "date-fns": "^2.29.3",
+    "dotenv": "^10.0.0",
+    "gtfs-stream": "^2.2.0",
+    "jest": "^27.0.6",
+    "moment": "^2.29.1",
+    "nanoid": "^3.1.23",
+    "node-fetch": "^2.6.7",
+    "node-kmeans": "^1.1.9",
+    "perlin-noise": "^0.0.1",
+    "point-in-polygon": "^1.0.1",
+    "polyline": "^0.2.0",
+    "request": "^2.88.2",
+    "rxjs": "^7.8.1",
+    "socket.io": "^4.6",
+    "swe-coords": "^1.0.0",
+    "xlsx": "^0.17.0"
+  },
+  "directories": {
+    "test": "__tests__"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PredictiveMovement/digital-twin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PredictiveMovement/digital-twin/issues"
+  },
+  "homepage": "https://www.predictivemovement.se",
+  "nodemonConfig": {
+    "ignore": [
+      "data/pm_bookings*.json"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-rxjs": "^5.0.3",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.7"
+  }
+}

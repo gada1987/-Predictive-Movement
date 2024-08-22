@@ -1,0 +1,53 @@
+{
+  "name": "visualisation",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.11.16",
+    "@vitejs/plugin-react": "^3.1.0",
+    "deck.gl": "^8.8.23",
+    "jsoneditor-react": "^3.1.2",
+    "maplibre-gl": "^1.15.3",
+    "moment-duration-format": "^2.3.2",
+    "point-in-polygon": "^1.1.0",
+    "rc-slider": "^9.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-map-gl": "^6.1.16",
+    "react-scripts": "^5.0.1",
+    "socket.io-client": "^4.0",
+    "styled-components": "^5.0.0",
+    "vite": "^4.2.1",
+    "vite-plugin-svgr": "^2.4.0",
+    "worker-loader": "^3.0.8"
+  },
+  "scripts": {
+    "start": "vite serve",
+    "build": "vite build",
+    "dev": "vite --host --open --port 3000"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^2.8.7"
+  }
+}

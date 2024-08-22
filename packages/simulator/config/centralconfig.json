@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "osrm": "http://194.28.122.68:5000",
+    "pelias": "http://194.28.122.68:3100",
+    "elasticsearch": "http://localhost:9200",
+    "vroom": "http://194.28.122.68:3000"
+  },
+  "paths": {
+    "gtfs": "packages/simulator/streams/transport/gtfs.js",
+    "fleets": "packages/simulator/lib/class/fleet.js",
+    "kommuner": "packages/simulator/web/routes/kommuner.js",
+    "hmBooking": "packages/simulator/streams/bookings/helsinborg/hm.js",
+    "ikeaBooking": "packages/simulator/streams/bookings/helsinborg/ikea.js"
+  }
+}

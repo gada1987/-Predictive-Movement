@@ -1,0 +1,55 @@
+{
+    "id": "pPcM-ucQZ",
+    "startDate": "2023-04-26T13:37:41.083Z",
+    "fixedRoute": 21,
+    "emitters": [
+      "bookings",
+      "buses",
+      "busLines",
+      "busStops",
+      "cars",
+      "kommuner",
+      "measureStations",
+      "passengers",
+      "taxis"
+    ],
+    "vehicleTypes": {
+      "tungLastbil": {
+        "weight": 26000,
+        "parcelCapacity": 1440,
+        "className": "Truck"
+      },
+      "medeltungLastbil": {
+        "weight": 16500,
+        "parcelCapacity": 540,
+        "className": "Truck"
+      },
+      "lättLastbil": {
+        "weight": 3500,
+        "parcelCapacity": 240,
+        "className": "Truck"
+      },
+      "bil": {
+        "weight": 1500,
+        "parcelCapacity": 25,
+        "className": "Car"
+      },
+      "drönare": {
+        "weight": 5,
+        "parcelCapacity": 1,
+        "className": "Drone"
+      },
+      "taxi": {
+        "weight": 1500,
+        "passengerCapacity": 4,
+        "className": "Taxi"
+      },
+      "bus": {
+        "weight": 10000,
+        "passengerCapacity": 50,
+        "className": "Bus"
+      }
+    }
+
+  }
+  

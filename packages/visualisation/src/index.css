@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.MuiSlider-rail {
+  background: rgb(103, 103, 103) !important;
+  opacity: 1 !important;
+}
+
+.MuiSlider-track,
+.MuiSlider-thumbColorPrimary {
+  background: rgb(103, 103, 103) !important;
+  color: rgb(103, 103, 103) !important;
+}
+
+.Mui-active,
+.MuiSlider-thumbColorPrimary:hover {
+  box-shadow: none !important;
+}

@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-address
+  namespace: pm-streams
+spec:
+  ports:
+    - port: 4001
+      targetPort: 4001
+  selector:
+    app: sample-address
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-address
+  namespace: pm-streams
+spec:
+  selector:
+    matchLabels:
+      app: sample-address
+  template:
+    metadata:
+      labels:
+        app: sample-address
+    spec:
+      containers:
+        - name: sample-address
+          image: predictivemovement/sample-address
+          ports:
+            - containerPort: 4001
+          resources:
+            requests:
+              cpu: "0.1"
+              memory: "100Mi"
+          env:
+            - name: PELIAS_HOSTNAME
+              value: elasticsearch.elasticsearch.svc.cluster.local:9200
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sample-address-ingress
+  namespace: pm-streams
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "360"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "360"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "360"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+spec:
+  tls:
+    - hosts:
+        - streams.predictivemovement.com
+      secretName: sampleaddresses-prod-tls
+  rules:
+    - host: streams.predictivemovement.com
+      http:
+        paths:
+          - path: /addresses/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: sample-address
+                port:
+                  number: 4001

@@ -1,0 +1,77 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pelias-prod-tls
+  namespace: pelias
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  secretName: pelias-prod-tls
+  dnsNames:
+  - pelias.predictivemovement.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sampleaddresses-prod-tls
+  namespace: pm-streams
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  secretName: sampleaddresses-prod-tls
+  dnsNames:
+  - streams.predictivemovement.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tvilling-stage-tls
+  namespace: digital-twin-stage
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  secretName: tvilling-stage-tls
+  dnsNames:
+  - tvilling-stage.predictivemovement.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vroom-prod-tls
+  namespace: vroom
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  secretName: vroom-prod-tls
+  dnsNames:
+  - vroom.predictivemovement.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: osrm-prod-tls
+  namespace: osrm
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  secretName: osrm-prod-tls
+  dnsNames:
+  - osrm.predictivemovement.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: otp-prod-tls
+  namespace: otp
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  secretName: otp-prod-tls
+  dnsNames:
+  - otp.predictivemovement.se

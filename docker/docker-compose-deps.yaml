@@ -1,0 +1,195 @@
+services:
+
+  # *************************************************************** #
+  pelias-api:
+    image: pelias/api:v5.54.0
+    environment:
+      - PELIAS_CONFIG=/etc/config/pelias.json
+    volumes:
+      - config-volume:/etc/config
+      - ./conf/pelias.json:/etc/config/pelias.json
+    ports:
+      - 3100:3100
+    depends_on:
+      busybox-pelias-create-schema:
+          condition: service_completed_successfully
+      pelias-pip:
+          condition: service_started
+      pelias-libpostal:
+          condition: service_started
+      pelias-osm-importer:
+          condition: service_started
+
+  busybox-pelias-create-schema:
+    image: pelias/schema:v6.4.0
+    environment:
+      - PELIAS_CONFIG=/etc/config/pelias.json
+    volumes:
+      - config-volume:/etc/config
+      - ./conf/pelias.json:/etc/config/pelias.json
+    command: 
+      - sh 
+      - -c 
+      - ./bin/create_index || true
+
+  # *************************************************************** #
+  pelias-dashboard:
+    image: pelias/dashboard:master
+    environment:
+      - AUTH_TOKEN=foo
+      - ES_ENDPOINT=http://elasticsearch:9200/
+    ports:
+      - 3030:3030
+    depends_on:
+      pelias-api:
+          condition: service_started
+
+  # *************************************************************** #
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.1
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200/
+    ports:
+      - 5601:5601
+    depends_on:
+      pelias-api:
+          condition: service_started
+
+  # *************************************************************** #
+  pelias-libpostal:
+    image: pelias/libpostal-service:master
+    ports:
+      - 4400:4400
+
+  # *************************************************************** #
+  pelias-osm-importer:
+    image: pelias/openstreetmap:master
+    environment:
+      - PELIAS_CONFIG=/etc/config/pelias.json
+    volumes: 
+      - config-volume:/etc/config
+      - data-volume:/data/openstreetmap
+      - ./conf/pelias.json:/etc/config/pelias.json
+      # - ./data/sweden-latest.osm.pbf:/data/openstreetmap/sweden-latest.osm.pbf
+    command: 
+      - sh 
+      - -c 
+      - ./bin/start
+    depends_on:
+      busybox-pelias-osm-importer-volume-permission:
+          condition: service_completed_successfully
+
+  busybox-pelias-osm-importer-make-directory:
+    image: busybox:latest
+    volumes:
+      - data-volume:/data/openstreetmap
+    command: 
+      - mkdir 
+      - -p 
+      - /data/openstreetmap
+
+  busybox-pelias-osm-importer-volume-permission:
+    image: busybox:latest
+    volumes:
+      - data-volume:/data/openstreetmap
+    command: 
+      - sh 
+      - -c 
+      - chown -R 1000:1000 /data/openstreetmap
+    depends_on:
+      busybox-pelias-osm-importer-make-directory:
+          condition: service_completed_successfully
+
+  # *************************************************************** #
+  pelias-pip:
+    image: pelias/pip-service:master
+    environment:
+      - PELIAS_CONFIG=/etc/config/pelias.json
+    volumes:
+      - config-volume:/etc/config
+      - data-volume:/data
+      - ./conf/pelias.json:/etc/config/pelias.json
+    ports:
+      - 3102:3102
+    depends_on:
+      busybox-pelias-pip-download-data:
+          condition: service_completed_successfully
+
+  busybox-pelias-pip-make-directory:
+    image: busybox:latest
+    volumes:
+      - data-volume:/data
+    command:
+      - mkdir
+      - -p
+      - /data/whosonfirst/sqlite
+
+  busybox-pelias-pip-volume-permission:
+    image: busybox
+    volumes:
+      - data-volume:/data
+    command:
+      - sh
+      - -c
+      - chown -R 1000:1000 /data/whosonfirst/sqlite
+    depends_on:
+      busybox-pelias-pip-make-directory:
+          condition: service_completed_successfully
+      
+  busybox-pelias-pip-download-data:
+    image: pelias/pip-service:master
+    environment:
+      - PELIAS_CONFIG=/etc/config/pelias.json
+    volumes:
+      - config-volume:/etc/config
+      - data-volume:/data
+      - ./conf/pelias.json:/etc/config/pelias.json
+    command:
+      - sh
+      - -c
+      - ./bin/download --admin-only
+    depends_on:
+      busybox-pelias-pip-volume-permission:
+          condition: service_completed_successfully
+
+  # *************************************************************** #
+  otp:
+    image: fernand0labra/otp-sweden:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      pelias-api:
+          condition: service_started
+
+  # *************************************************************** #
+  osrm:
+    image: fernand0labra/osrm-sweden:latest
+    environment:
+      - DOWNLOAD_URL=https://download.geofabrik.de/europe/sweden-latest.osm.pbf
+    command:
+      - /bin/sh
+      - -c
+      - osrm-routed --algorithm mld --max-table-size 10000 /data/sweden-latest.osrm
+    ports:
+      - 5000:5000
+    depends_on:
+      pelias-api:
+          condition: service_started
+
+  # *************************************************************** #
+  vroom:
+    image: vroomvrp/vroom-docker:v1.11.0
+    environment:
+      - VROOM_ROUTER=osrm
+      - OSRM_URL=osrm
+    volumes:
+      - ./conf/vroom.yaml:/conf/config.yml
+    ports: 
+      - 3000:3000
+    depends_on:
+      pelias-api:
+          condition: service_started
+
+volumes:
+  config-volume:
+  data-volume:
